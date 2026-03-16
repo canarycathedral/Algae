@@ -14,6 +14,7 @@ export default function Game() {
   });
   const divRef = useRef(null);
 
+  // Surface algae
   const surfaceSvgs = [
     "Carpet Algae.svg",
     "Chlorella.svg",
@@ -22,6 +23,7 @@ export default function Game() {
     "Spirogyra.svg",
   ];
 
+  // Floor algae
   const floorSvgs = [
     "Bubble Algae.svg",
     "Gracilaria.svg",
@@ -29,10 +31,12 @@ export default function Game() {
     "Peacock's Tail.svg",
     "Sea Lettuce.svg",
     "Grape Algae.svg",
+    "Benthic Mats.svg"
   ];
 
+  // "Bad" algae
   const badSurfaceSvgs = ["Dinoflagellates.svg", "Cyanobacteria.svg"];
-  const badFloorSvgs = ["Grape Algae.svg"];
+  const badFloorSvgs = ["Grape Algae.svg", "Benthic Mats.svg"];
 
   // Places 4 surface algae, with randomized bad count (total bad = 3 across both)
   useEffect(() => {
@@ -71,7 +75,7 @@ export default function Game() {
         }
       }
 
-      // Place surface good algae
+      // Place good surface algae
       const goodSvgs = surfaceSvgs.filter(s => !badSurfaceSvgs.includes(s));
       for (let i = 0; i < 4 - surfaceBadCount; i++) {
         let attempts = 0;
@@ -101,7 +105,7 @@ export default function Game() {
     }
   }, []);
 
-  // Places 5 floor algae, with exactly 2 bad
+  // Places 5 floor algae
   useEffect(() => {
     if (divRef.current) {
       const rect = divRef.current.getBoundingClientRect();
@@ -109,7 +113,7 @@ export default function Game() {
       const centerY = rect.height * 0.65;
       const minDistance = 200; // Minimum distance between assets
 
-      // Place floor bad algae
+      // Place bad floor algae
       for (let i = 0; i < badDistribution.floorBad; i++) {
         let attempts = 0;
         let x, y, overlaps;
@@ -135,7 +139,7 @@ export default function Game() {
         }
       }
 
-      // Place floor good algae
+      // Place good floor algae
       const goodSvgs = floorSvgs.filter(s => !badFloorSvgs.includes(s));
       for (let i = 0; i < 5 - badDistribution.floorBad; i++) {
         let attempts = 0;
