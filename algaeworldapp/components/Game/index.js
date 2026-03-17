@@ -13,13 +13,11 @@ export default function Game() {
     return { surfaceBad, floorBad: 3 - surfaceBad }; // remainder of bad algae to make a total of 3 bad algae
   });
   const divRef = useRef(null);
+  const incorrectRemoval = useRef(0); // incorrect algae removal counter
+  const correctRemoval = useRef(0); // correct algae removal counter
 
   // Good urface algae array
-  const surfaceSvgs = [
-    "Carpet Algae.svg",
-    "Chlorella.svg",
-    "Spirogyra.svg",
-  ];
+  const surfaceSvgs = ["Carpet Algae.svg", "Chlorella.svg", "Spirogyra.svg"];
 
   // Good floor algae array
   const floorSvgs = [
@@ -28,7 +26,6 @@ export default function Game() {
     "Gulfweed.svg",
     "Peacock's Tail.svg",
     "Sea Lettuce.svg",
-    
   ];
 
   // Bad algae
@@ -40,7 +37,7 @@ export default function Game() {
     if (divRef.current) {
       const rect = divRef.current.getBoundingClientRect(); // rect = the size of the game container
       const assets = []; // array that holds the pushed algae
-      const centerY = rect.height * 0.20; // adjusts the position of the line which the surface algae will be placed along
+      const centerY = rect.height * 0.2; // adjusts the position of the line which the surface algae will be placed along
       const minDistance = 200; // Minimum distance between assets
 
       // Randomize bad distribution: total 3 bad algae
@@ -64,7 +61,8 @@ export default function Game() {
 
         // runs if algae does not overlap
         if (!overlaps) {
-          const src = badSurfaceSvgs[Math.floor(Math.random() * badSurfaceSvgs.length)]; // chooses random bad surface algae
+          const src =
+            badSurfaceSvgs[Math.floor(Math.random() * badSurfaceSvgs.length)]; // chooses random bad surface algae
           assets.push({
             src,
             x: Math.max(0, Math.min(x, rect.width - 50)),
@@ -111,7 +109,7 @@ export default function Game() {
     if (divRef.current) {
       const rect = divRef.current.getBoundingClientRect();
       const assets = [];
-      const centerY = rect.height * 0.70; // adjusts the position of the line which the floor algae will be placed along
+      const centerY = rect.height * 0.7; // adjusts the position of the line which the floor algae will be placed along
       const minDistance = 200; // Minimum distance between assets
 
       // Place bad floor algae
@@ -132,7 +130,8 @@ export default function Game() {
 
         // runs if algae can be placed without overlapping
         if (!overlaps) {
-          const src = badFloorSvgs[Math.floor(Math.random() * badFloorSvgs.length)];
+          const src =
+            badFloorSvgs[Math.floor(Math.random() * badFloorSvgs.length)];
           assets.push({
             src,
             x: Math.max(0, Math.min(x, rect.width - 50)),
@@ -184,23 +183,45 @@ export default function Game() {
 
   // removing bad algae behaviour
   const handleAssetClick = (asset, index, type) => {
-    if (activeTool === 'net' && asset.isBad) {
+    if (activeTool === "net" && asset.isBad) {
       // if bad surface is algae clicked, it is removed from surfaceAssets
-      if (type === 'surface') {
+      if (type === "surface") {
         setSurfaceAssets((prev) => {
           const next = [...prev];
           next.splice(index, 1);
           return next;
         });
-      } 
+      }
       // if bad floor algae is clicked, it is removed from floorAssets
-      else if (type === 'floor') {
+      else if (type === "floor") {
         setFloorAssets((prev) => {
           const next = [...prev];
           next.splice(index, 1);
           return next;
         });
       }
+      correctRemoval.current++;
+      console.log("Correct clicks: " + correctRemoval.current);
+    } 
+    else if (activeTool === "net" && !asset.isBad) {
+      // if good surface algae is clicked, it is removed from surfaceAssets
+      if (type === "surface") {
+        setSurfaceAssets((prev) => {
+          const next = [...prev];
+          next.splice(index, 1);
+          return next;
+        });
+      }
+      // if good floor algae is clicked, it is removed from surfaceAssets
+      else if (type === "floor") {
+        setFloorAssets((prev) => {
+          const next = [...prev];
+          next.splice(index, 1);
+          return next;
+        });
+      }
+      incorrectRemoval.current++;
+      console.log("Incorrect clicks: " + incorrectRemoval.current);
     }
   };
 
@@ -226,7 +247,6 @@ export default function Game() {
     };
   }, [activeTool]);
 
-
   // UI render
   return (
     // main/outter container
@@ -242,7 +262,7 @@ export default function Game() {
         backgroundPosition: "center",
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
-        cursor: activeTool ? "none" : cursor, // if there is an active tool, cursor: "none". else, cursor will be default
+        cursor: activeTool ? "none" : "default", // if there is an active tool, cursor: "none". else, cursor will be default
       }}
     >
       {/* renders surface algae */}
@@ -252,14 +272,14 @@ export default function Game() {
           src={`/images/surface_algae/${asset.src}`}
           alt={asset.src}
           data-bad={asset.isBad ? "true" : "false"}
-          onClick={() => handleAssetClick(asset, i, 'surface')}
+          onClick={() => handleAssetClick(asset, i, "surface")}
           style={{
             position: "absolute",
             left: asset.x,
             top: asset.y,
             width: "250px",
             height: "250px",
-            pointerEvents: activeTool === 'net' ? 'auto' : 'none',
+            pointerEvents: activeTool === "net" ? "auto" : "none",
           }}
         />
       ))}
@@ -270,19 +290,19 @@ export default function Game() {
           src={`/images/floor_algae/${asset.src}`}
           alt={asset.src}
           data-bad={asset.isBad ? "true" : "false"}
-          onClick={() => handleAssetClick(asset, i, 'floor')}
+          onClick={() => handleAssetClick(asset, i, "floor")}
           style={{
             position: "absolute",
             left: asset.x,
             top: asset.y,
             width: "100px",
             height: "100px",
-            pointerEvents: activeTool === 'net' ? 'auto' : 'none',
+            pointerEvents: activeTool === "net" ? "auto" : "none",
           }}
         />
       ))}
       {/* renders static magnifying glass button/icon */}
-      {(!activeTool || activeTool === 'net') && (
+      {(!activeTool || activeTool === "net") && (
         <img
           src="/images/Mangifying Glass.svg"
           alt="Magnifying Glass"
@@ -298,7 +318,7 @@ export default function Game() {
         />
       )}
       {/* renders static net button/icon */}
-      {(!activeTool || activeTool === 'magnifier') && (
+      {(!activeTool || activeTool === "magnifier") && (
         <img
           src="/images/Net.svg"
           alt="Net"
@@ -323,7 +343,7 @@ export default function Game() {
             width: "100%",
             height: "100%",
             zIndex: 10,
-            pointerEvents: activeTool === 'net' ? 'none' : 'auto',
+            pointerEvents: activeTool === "net" ? "none" : "auto",
           }}
           onClick={handleOverlayClick}
         >
