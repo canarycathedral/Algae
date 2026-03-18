@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import StartScreen from "../StartScreen";
+import Scoreboard from "../Scoreboard";
 
 export default function Game() {
-  // const [cursor] = useState("default");
   const [activeTool, setActiveTool] = useState(null); // 'magnifier' or 'net'
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [surfaceAssets, setSurfaceAssets] = useState([]);
@@ -14,7 +15,8 @@ export default function Game() {
   });
   const divRef = useRef(null);
   const incorrectRemoval = useRef(0); // incorrect algae removal counter
-  const correctRemoval = useRef(0); // correct algae removal counter
+  const [correctRemoval, setCorrectRemoval] = useState(0); // correct algae removal counter
+  const [gameStarted, setGameStart] = useState(false);
 
   // Good urface algae array
   const surfaceSvgs = ["Carpet Algae.svg", "Chlorella.svg", "Spirogyra.svg"];
@@ -195,8 +197,8 @@ export default function Game() {
           return next;
         });
       }
-      correctRemoval.current++;
-      console.log("Correct clicks: " + correctRemoval.current);
+      setCorrectRemoval((prev) => prev + 1);
+      console.log("Correct clicks: " + correctRemoval);
     } 
     else if (activeTool === "net" && !asset.isBad) {
       // if good surface algae is clicked, it is removed from surfaceAssets
@@ -260,6 +262,8 @@ export default function Game() {
         cursor: activeTool ? "none" : "default", // if there is an active tool, cursor: "none". else, cursor will be default
       }}
     >
+      {!gameStarted && <StartScreen onStart={() => setGameStart(true)}></StartScreen>}
+      <Scoreboard correctRemoval={correctRemoval}></Scoreboard>
       {/* renders surface algae */}
       {surfaceAssets.map((asset, i) => (
         <img
