@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 
 export default function Game() {
-  const [cursor] = useState("default");
+  // const [cursor] = useState("default");
   const [activeTool, setActiveTool] = useState(null); // 'magnifier' or 'net'
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [surfaceAssets, setSurfaceAssets] = useState([]);
@@ -104,7 +104,7 @@ export default function Game() {
     }
   }, []);
 
-  // Places 5 floor algae
+  // Places up to 4 floor algae
   useEffect(() => {
     if (divRef.current) {
       const rect = divRef.current.getBoundingClientRect();
@@ -173,12 +173,7 @@ export default function Game() {
 
   // sets active tool
   const handleToolClick = (tool) => {
-    setActiveTool(tool);
-  };
-
-  // deselects active tool
-  const handleOverlayClick = () => {
-    setActiveTool(null);
+    setActiveTool(activeTool === tool ? null : tool);
   };
 
   // removing bad algae behaviour
@@ -302,37 +297,33 @@ export default function Game() {
         />
       ))}
       {/* renders static magnifying glass button/icon */}
-      {(!activeTool || activeTool === "net") && (
-        <img
-          src="/images/Mangifying Glass.svg"
-          alt="Magnifying Glass"
-          style={{
-            position: "absolute",
-            bottom: "10px",
-            right: "10px",
-            width: "100px", // width of magnifying glass icon
-            height: "100px", // height of magnifying glass icon
-            cursor: "pointer",
-          }}
-          onClick={() => handleToolClick("magnifier")}
-        />
-      )}
+      <img
+        src={activeTool === "magnifier" ? "images/magClickedsvg.svg" : "images/magDefaultsvg.svg"}
+        alt="Magnifying Glass"
+        style={{
+          position: "absolute",
+          bottom: "10px",
+          right: "10px",
+          width: "100px",
+          height: "100px",
+          cursor: "pointer",
+        }}
+        onClick={() => handleToolClick("magnifier")}
+      />
       {/* renders static net button/icon */}
-      {(!activeTool || activeTool === "magnifier") && (
-        <img
-          src="/images/Net.svg"
-          alt="Net"
-          style={{
-            position: "absolute",
-            bottom: "10px",
-            right: "120px",
-            width: "100px", // width of net icon
-            height: "100px", // height of net icon
-            cursor: "pointer",
-          }}
-          onClick={() => handleToolClick("net")}
-        />
-      )}
+      <img
+        src={activeTool === "net" ? "images/netClickedsvg.svg" : "images/netDefaultsvg.svg"}
+        alt="Net"
+        style={{
+          position: "absolute",
+          bottom: "10px",
+          right: "120px",
+          width: "100px",
+          height: "100px",
+          cursor: "pointer",
+        }}
+        onClick={() => handleToolClick("net")}
+      />
       {/* renders active tool icon which follows/replaces cursor */}
       {activeTool && (
         <div
@@ -343,9 +334,8 @@ export default function Game() {
             width: "100%",
             height: "100%",
             zIndex: 10,
-            pointerEvents: activeTool === "net" ? "none" : "auto",
+            pointerEvents: "none"
           }}
-          onClick={handleOverlayClick}
         >
           <img
             src={
