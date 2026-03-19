@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import StartScreen from "../StartScreen";
 import Scoreboard from "../Scoreboard";
+import EndScreen from "../EndScreen";
+import AlgaeInfoOverlay from "../AlgaeInfoOverlay";
 
 export default function Game() {
   const [activeTool, setActiveTool] = useState(null); // 'magnifier' or 'net'
@@ -14,9 +16,10 @@ export default function Game() {
     return { surfaceBad, floorBad: 3 - surfaceBad }; // remainder of bad algae to make a total of 3 bad algae
   });
   const divRef = useRef(null);
-  const incorrectRemoval = useRef(0); // incorrect algae removal counter
+  const [incorrectRemoval, setIncorrectRemoval] = useState(0); // incorrect algae removal counter
   const [correctRemoval, setCorrectRemoval] = useState(0); // correct algae removal counter
   const [gameStarted, setGameStart] = useState(false);
+  const [hoveredAlgae, setHoveredAlgae] = useState(null);
 
   // Good urface algae array
   const surfaceSvgs = ["Carpet Algae.svg", "Chlorella.svg", "Spirogyra.svg"];
@@ -120,7 +123,7 @@ export default function Game() {
         let x, y, overlaps;
         // loops until algae can be placed without overlaps
         do {
-          x = Math.random() * (rect.width - 250);
+          x = Math.random() * (rect.width - 350);
           y = centerY + (Math.random() - 0.5) * 50;
           overlaps = assets.some(
             (asset) =>
@@ -149,7 +152,7 @@ export default function Game() {
         let attempts = 0;
         let x, y, overlaps;
         do {
-          x = Math.random() * (rect.width - 250);
+          x = Math.random() * (rect.width - 350);
           y = centerY + (Math.random() - 0.5) * 50;
           overlaps = assets.some(
             (asset) =>
@@ -217,8 +220,8 @@ export default function Game() {
           return next;
         });
       }
-      incorrectRemoval.current++;
-      console.log("Incorrect clicks: " + incorrectRemoval.current);
+      setIncorrectRemoval((prev) => prev + 1)
+      console.log("Incorrect clicks: " + incorrectRemoval);
     }
   };
 
@@ -237,6 +240,8 @@ export default function Game() {
 
     if (activeTool) {
       window.addEventListener("mousemove", handleMouseMove);
+    } else {
+      setHoveredAlgae(null);
     }
 
     return () => {
@@ -272,13 +277,15 @@ export default function Game() {
           alt={asset.src}
           data-bad={asset.isBad ? "true" : "false"}
           onClick={() => handleAssetClick(asset, i, "surface")}
+          onMouseEnter={() => activeTool === "magnifier" && setHoveredAlgae(asset.src.replace(".svg", ""))}
+          onMouseLeave={() => setHoveredAlgae(null)}
           style={{
             position: "absolute",
             left: asset.x,
             top: asset.y,
             width: "250px",
             height: "250px",
-            pointerEvents: activeTool === "net" ? "auto" : "none",
+            pointerEvents: activeTool ? "auto" : "none",
           }}
         />
       ))}
@@ -290,13 +297,15 @@ export default function Game() {
           alt={asset.src}
           data-bad={asset.isBad ? "true" : "false"}
           onClick={() => handleAssetClick(asset, i, "floor")}
+          onMouseEnter={() => activeTool === "magnifier" && setHoveredAlgae(asset.src.replace(".svg", ""))}
+          onMouseLeave={() => setHoveredAlgae(null)}
           style={{
             position: "absolute",
             left: asset.x,
             top: asset.y,
             width: "100px",
             height: "100px",
-            pointerEvents: activeTool === "net" ? "auto" : "none",
+            pointerEvents: activeTool ? "auto" : "none",
           }}
         />
       ))}
@@ -330,33 +339,22 @@ export default function Game() {
       />
       {/* renders active tool icon which follows/replaces cursor */}
       {activeTool && (
-        <div
+        <img
+          src={activeTool === "magnifier" ? "/images/Mangifying Glass.svg" : "/images/Net.svg"}
           style={{
             position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
+            left: mousePos.x - 75,
+            top: mousePos.y - 75,
+            width: "150px",
+            height: "150px",
             zIndex: 10,
-            pointerEvents: "none"
+            pointerEvents: "none",
           }}
-        >
-          <img
-            src={
-              activeTool === "magnifier"
-                ? "/images/Mangifying Glass.svg"
-                : "/images/Net.svg"
-            }
-            style={{
-              position: "absolute",
-              left: mousePos.x - 75,
-              top: mousePos.y - 75,
-              width: "150px",
-              height: "150px",
-              pointerEvents: "none",
-            }}
-          />
-        </div>
+        />
+      )}
+      {/* algae info overlay shown when magnifier hovers over an algae */}
+      {activeTool === "magnifier" && hoveredAlgae && (
+        <AlgaeInfoOverlay hoveredAlgae={hoveredAlgae} />
       )}
     </div>
   );
