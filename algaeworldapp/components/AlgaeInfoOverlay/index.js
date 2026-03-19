@@ -3,14 +3,14 @@ const algaeInfo = {
   "Chlorella": "It is a key part of the aquatic food chain and an important oxygen producer.",
   "Spirogyra": "An important oxygen producer found in freshwater environments.",
   "Bubble Algae": "Acts as a habitat or food source for small organisms.",
-  "Gracilaria": "A red algae used in food production and as a source of agar. It supports marine biodiversity as habitat for many species.",
-  "Gulfweed": "Creates floating ecosystems in the ocean, providing critical habitat for dozens of marine species.",
-  "Peacock's Tail": "A fan-shaped brown alga that plays a role in calcium carbonate production and reef building.",
-  "Sea Lettuce": "An edible green alga that supports grazing invertebrates and fish. Thrives in nutrient-rich coastal waters.",
-  "Dinoflagellates": "Can form toxic red tides that deplete oxygen and produce toxins harmful to marine life and humans.",
-  "Cyanobacteria": "Produces toxins that are dangerous to fish, animals, and humans. Should be removed immediately.",
-  "Grape Algae": "An invasive species that rapidly outcompetes native marine plants and disrupts local ecosystems.",
-  "Benthic Mats": "Smothers the seafloor, blocking light and suffocating bottom-dwelling organisms.",
+  "Gracilaria": "It supports marine biodiversity as habitat for many species.",
+  "Gulfweed": "Provides critical habitat for dozens of marine species.",
+  "Peacock's Tail": "Absorbs carbon dioxide and releases oxygen. Indicator of a healthy ecosystem.",
+  "Sea Lettuce": "Consumes excess nutrients and is an excellent food source for aquatic organisms.",
+  "Dinoflagellates": 'Can form "red tides" that deplete oxygen and produce harmful toxins.',
+  "Cyanobacteria": "Produces toxins that are dangerous to fish, animals, and humans.",
+  "Grape Algae": "An invasive species that disrupts ecosystems.",
+  "Benthic Mats": "Produces harmful toxins that may affect other plants and animals.",
 };
 
 export default function AlgaeInfoOverlay({ hoveredAlgae }) {
