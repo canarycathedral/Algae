@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 108.76">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-width: 3.48px;
+      }
+
+      .cls-1, .cls-2 {
+        fill: none;
+        stroke: #8cef73;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-3 {
+        fill: #4fcf5e;
+      }
+
+      .cls-2 {
+        stroke-width: 2.5px;
+      }
+
+      .cls-4 {
+        fill: #8cef73;
+      }
+    </style>
+  </defs>
+  <g id="Net_clicked" data-name="Net clicked">
+    <g>
+      <rect class="cls-4" y="0" width="100" height="100" rx="23.14" ry="23.14"/>
+      <rect class="cls-3" y="8.76" width="100" height="100" rx="23.14" ry="23.14"/>
+      <polyline class="cls-4" points="96.28 78.83 75.4 68.61 79.26 60.81 96.31 69.24"/>
+      <rect class="cls-4" x="39.82" y="13.38" width="11.26" height="71.13" transform="translate(-18.57 67.99) rotate(-63.69)"/>
+      <path class="cls-1" d="M73.17,63.97c-9.96,20.14-30.67,30.21-46.27,22.49s-20.17-30.29-10.22-50.42"/>
+      <g>
+        <line class="cls-2" x1="13.73" y1="44.87" x2="28.35" y2="88.09"/>
+        <line class="cls-2" x1="21.79" y1="38.48" x2="39.01" y2="89.39"/>
+        <line class="cls-2" x1="32.04" y1="38.55" x2="48.18" y2="86.28"/>
+        <line class="cls-2" x1="44.43" y1="44.98" x2="57.36" y2="83.18"/>
+        <line class="cls-2" x1="56.59" y1="50.69" x2="65.2" y2="76.17"/>
+        <line class="cls-2" x1="36.94" y1="41.28" x2="11.2" y2="49.99"/>
+        <line class="cls-2" x1="50.18" y1="47.02" x2="11.02" y2="60.27"/>
+        <line class="cls-2" x1="61.85" y1="53.29" x2="14.12" y2="69.44"/>
+        <line class="cls-2" x1="68.13" y1="61.39" x2="17.22" y2="78.61"/>
+        <line class="cls-2" x1="68.89" y1="71.36" x2="24.72" y2="86.3"/>
+      </g>
+    </g>
+  </g>
+</svg>

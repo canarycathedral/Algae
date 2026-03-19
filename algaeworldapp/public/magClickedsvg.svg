@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 108.76">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-miterlimit: 10;
+        stroke-width: 7.83px;
+      }
+
+      .cls-1, .cls-2 {
+        fill: none;
+        stroke: #8cef73;
+      }
+
+      .cls-2 {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 7px;
+      }
+
+      .cls-3 {
+        fill: #4fcf5e;
+      }
+
+      .cls-4 {
+        fill: #8cef73;
+      }
+    </style>
+  </defs>
+  <g id="Mag_clicked" data-name="Mag clicked">
+    <g>
+      <rect class="cls-4" x="0" width="100" height="100" rx="23.14" ry="23.14"/>
+      <rect class="cls-3" y="8.76" width="100" height="100" rx="23.14" ry="23.14"/>
+      <polyline class="cls-4" points="68.35 104.94 58.95 85.61 66.77 81.8 77.92 104.89"/>
+      <circle class="cls-1" cx="48.79" cy="54.76" r="32.92"/>
+      <path class="cls-2" d="M47.11,31.28c8.8-.23,16.01,3.59,21.56,11.78"/>
+      <circle class="cls-2" cx="72.22" cy="50.94" r=".13"/>
+    </g>
+  </g>
+</svg>
