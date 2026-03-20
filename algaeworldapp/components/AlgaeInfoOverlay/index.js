@@ -45,7 +45,7 @@ export default function AlgaeInfoOverlay({ hoveredAlgae }) {
       }}
     >
       <img
-        src="/images/infoboxsvg.svg"
+        src="/infoboxsvg.svg"
         alt=""
         style={{
           position: "absolute",

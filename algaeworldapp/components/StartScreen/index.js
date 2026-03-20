@@ -13,7 +13,6 @@ const [pressedStartBtn, setPressedStartBtn] = useState(false);
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "0,0,0,100",
         inset: 0,
       }}
     >
@@ -30,7 +29,7 @@ const [pressedStartBtn, setPressedStartBtn] = useState(false);
         }}
       >
         <img
-          src="/images/gamenamesvg.svg"
+          src="/gamenamesvg.svg"
           style={{
             maxWidth: "38%",
             height: "auto",
@@ -48,7 +47,7 @@ const [pressedStartBtn, setPressedStartBtn] = useState(false);
           }}
         >
           <img
-            src={pressedStartBtn ? "/images/playClickedsvg.svg" : "/images/playDefaultsvg.svg"}
+            src={pressedStartBtn ? "/playClickedsvg.svg" : "/playDefaultsvg.svg"}
             style={{
               width: "90%",
               minWidth: "50%"
@@ -56,7 +55,7 @@ const [pressedStartBtn, setPressedStartBtn] = useState(false);
           ></img>
         </button>
 
-        <img src="/images/playTextsvg.svg" style={{
+        <img src="/playTextsvg.svg" style={{
             maxWidth: "20%",
         }}></img>
 

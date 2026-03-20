@@ -281,7 +281,7 @@ export default function Game() {
         aspectRatio: 16 / 9,
         margin: "0 auto",
         paddingTop: "40%",
-        backgroundImage: "url(/images/Background.svg)",
+        backgroundImage: "url(/Background.svg)",
         backgroundPosition: "center",
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
@@ -344,8 +344,8 @@ export default function Game() {
       <img
         src={
           activeTool === "magnifier"
-            ? "images/magClickedsvg.svg"
-            : "images/magDefaultsvg.svg"
+            ? "/magClickedsvg.svg"
+            : "/magDefaultsvg.svg"
         }
         alt="Magnifying Glass"
         style={{
@@ -362,8 +362,8 @@ export default function Game() {
       <img
         src={
           activeTool === "net"
-            ? "images/netClickedsvg.svg"
-            : "images/netDefaultsvg.svg"
+            ? "/netClickedsvg.svg"
+            : "/netDefaultsvg.svg"
         }
         alt="Net"
         style={{
@@ -381,8 +381,8 @@ export default function Game() {
         <img
           src={
             activeTool === "magnifier"
-              ? "/images/Mangifying Glass.svg"
-              : "/images/Net.svg"
+              ? "/Mangifying Glass.svg"
+              : "/Net.svg"
           }
           style={{
             position: "absolute",

@@ -40,3 +40,8 @@ a {
     color-scheme: dark;
   }
 }
+
+@font-face {
+  font-family: "Gill Sans Nova Ultra Bold";
+  src: url(/fonts/GillSansUltraBoNova.woff);
+}
