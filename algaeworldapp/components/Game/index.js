@@ -3,7 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import StartScreen from "../StartScreen";
 import Scoreboard from "../Scoreboard";
-import EndScreen from "../EndScreen";
+import LossScreen from "../LossScreen";
+import WinScreen from "../WinScreen";
 import AlgaeInfoOverlay from "../AlgaeInfoOverlay";
 
 export default function Game() {
@@ -20,11 +21,13 @@ export default function Game() {
   const [correctRemoval, setCorrectRemoval] = useState(0); // correct algae removal counter
   const [gameStarted, setGameStart] = useState(false);
   const [hoveredAlgae, setHoveredAlgae] = useState(null);
+  const [gameWin, setGameWin] = useState(false);
+  const [gameLoss, setGameLoss] = useState(false);
 
-  // Good urface algae array
+  // Good algae
+  // surface
   const surfaceSvgs = ["Carpet Algae.svg", "Chlorella.svg", "Spirogyra.svg"];
-
-  // Good floor algae array
+  // floor
   const floorSvgs = [
     "Bubble Algae.svg",
     "Gracilaria.svg",
@@ -32,10 +35,11 @@ export default function Game() {
     "Peacock's Tail.svg",
     "Sea Lettuce.svg",
   ];
-
   // Bad algae
-  const badSurfaceSvgs = ["Dinoflagellates.svg", "Cyanobacteria.svg"]; // surface
-  const badFloorSvgs = ["Grape Algae.svg", "Benthic Mats.svg"]; // floor
+  // surface
+  const badSurfaceSvgs = ["Dinoflagellates.svg", "Cyanobacteria.svg"];
+  // floor
+  const badFloorSvgs = ["Grape Algae.svg", "Benthic Mats.svg"];
 
   // Places 4 surface algae, with randomized bad count (total bad = 3 across both)
   useEffect(() => {
@@ -176,6 +180,24 @@ export default function Game() {
     }
   }, []);
 
+  // game win condition
+  useEffect(() => {
+    if (correctRemoval >= 3) {
+      setGameWin(true);
+    }
+  }, [correctRemoval]);
+
+  // game loss condition
+  useEffect(() => {
+    const remainingGoodAlgae = [...surfaceAssets, ...floorAssets].filter(
+      (asset) => !asset.isBad
+    ).length;
+
+    if (gameStarted && remainingGoodAlgae === 0) {
+      setGameLoss(true);
+    }
+  }, [surfaceAssets, floorAssets, gameStarted])
+
   // sets active tool
   const handleToolClick = (tool) => {
     setActiveTool(activeTool === tool ? null : tool);
@@ -202,8 +224,7 @@ export default function Game() {
       }
       setCorrectRemoval((prev) => prev + 1);
       console.log("Correct clicks: " + correctRemoval);
-    } 
-    else if (activeTool === "net" && !asset.isBad) {
+    } else if (activeTool === "net" && !asset.isBad) {
       // if good surface algae is clicked, it is removed from surfaceAssets
       if (type === "surface") {
         setSurfaceAssets((prev) => {
@@ -220,7 +241,7 @@ export default function Game() {
           return next;
         });
       }
-      setIncorrectRemoval((prev) => prev + 1)
+      setIncorrectRemoval((prev) => prev + 1);
       console.log("Incorrect clicks: " + incorrectRemoval);
     }
   };
@@ -267,8 +288,12 @@ export default function Game() {
         cursor: activeTool ? "none" : "default", // if there is an active tool, cursor: "none". else, cursor will be default
       }}
     >
-      {!gameStarted && <StartScreen onStart={() => setGameStart(true)}></StartScreen>}
+      {!gameStarted && (
+        <StartScreen onStart={() => setGameStart(true)}></StartScreen>
+      )}
       <Scoreboard correctRemoval={correctRemoval}></Scoreboard>
+      {gameLoss && <LossScreen></LossScreen>}
+      {gameWin && <WinScreen></WinScreen>}
       {/* renders surface algae */}
       {surfaceAssets.map((asset, i) => (
         <img
@@ -277,7 +302,10 @@ export default function Game() {
           alt={asset.src}
           data-bad={asset.isBad ? "true" : "false"}
           onClick={() => handleAssetClick(asset, i, "surface")}
-          onMouseEnter={() => activeTool === "magnifier" && setHoveredAlgae(asset.src.replace(".svg", ""))}
+          onMouseEnter={() =>
+            activeTool === "magnifier" &&
+            setHoveredAlgae(asset.src.replace(".svg", ""))
+          }
           onMouseLeave={() => setHoveredAlgae(null)}
           style={{
             position: "absolute",
@@ -297,7 +325,10 @@ export default function Game() {
           alt={asset.src}
           data-bad={asset.isBad ? "true" : "false"}
           onClick={() => handleAssetClick(asset, i, "floor")}
-          onMouseEnter={() => activeTool === "magnifier" && setHoveredAlgae(asset.src.replace(".svg", ""))}
+          onMouseEnter={() =>
+            activeTool === "magnifier" &&
+            setHoveredAlgae(asset.src.replace(".svg", ""))
+          }
           onMouseLeave={() => setHoveredAlgae(null)}
           style={{
             position: "absolute",
@@ -311,7 +342,11 @@ export default function Game() {
       ))}
       {/* renders static magnifying glass button/icon */}
       <img
-        src={activeTool === "magnifier" ? "images/magClickedsvg.svg" : "images/magDefaultsvg.svg"}
+        src={
+          activeTool === "magnifier"
+            ? "images/magClickedsvg.svg"
+            : "images/magDefaultsvg.svg"
+        }
         alt="Magnifying Glass"
         style={{
           position: "absolute",
@@ -325,7 +360,11 @@ export default function Game() {
       />
       {/* renders static net button/icon */}
       <img
-        src={activeTool === "net" ? "images/netClickedsvg.svg" : "images/netDefaultsvg.svg"}
+        src={
+          activeTool === "net"
+            ? "images/netClickedsvg.svg"
+            : "images/netDefaultsvg.svg"
+        }
         alt="Net"
         style={{
           position: "absolute",
@@ -340,7 +379,11 @@ export default function Game() {
       {/* renders active tool icon which follows/replaces cursor */}
       {activeTool && (
         <img
-          src={activeTool === "magnifier" ? "/images/Mangifying Glass.svg" : "/images/Net.svg"}
+          src={
+            activeTool === "magnifier"
+              ? "/images/Mangifying Glass.svg"
+              : "/images/Net.svg"
+          }
           style={{
             position: "absolute",
             left: mousePos.x - 75,
