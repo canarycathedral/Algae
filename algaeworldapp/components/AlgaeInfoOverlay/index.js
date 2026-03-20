@@ -72,7 +72,6 @@ export default function AlgaeInfoOverlay({ hoveredAlgae }) {
               left: "38%",
               width: "70px",
               height: "70px",
-              objectFit: "contain",
             }}
           />
         )}
