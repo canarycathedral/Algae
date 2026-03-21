@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function StartScreen({ onStart }) {
+export default function StartScreen({onStart}) {
 const [pressedStartBtn, setPressedStartBtn] = useState(false);
 
   return (

@@ -28,7 +28,7 @@ const algaeImageSrc = {
   "Benthic Mats": "/images/floor_algae/Benthic Mats.svg",
 };
 
-export default function AlgaeInfoOverlay({ hoveredAlgae }) {
+export default function AlgaeInfoOverlay({hoveredAlgae}) {
   const imageSrc = algaeImageSrc[hoveredAlgae];
 
   return (

@@ -1,6 +1,8 @@
 "use client";
 
-export default function WinScreen() {
+import RestartButton from "../RestartButton";
+
+export default function WinScreen({onRestart}) {
   return (
     <div
       style={{
@@ -15,7 +17,7 @@ export default function WinScreen() {
     >
       <div
         style={{
-          background: "rgba(0, 0, 0, 0.7)",
+          background: "rgba(0, 0, 0, 0.3)",
           fontFamily: "Gill Sans Nova Ultra Bold",
           width: "100%",
           height: "100%",
@@ -37,11 +39,7 @@ export default function WinScreen() {
         <p style ={{
             fontSize: "1.3rem"
         }}>You removed all the bad algae</p>
-        <button
-          style={{
-            margin: "2rem",
-          }}
-        ></button>
+        <RestartButton onRestart={onRestart}></RestartButton>
         <p
           style={{
             color: "rgba(249, 255, 88, 1)",

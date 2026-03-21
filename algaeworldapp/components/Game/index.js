@@ -23,6 +23,7 @@ export default function Game() {
   const [hoveredAlgae, setHoveredAlgae] = useState(null);
   const [gameWin, setGameWin] = useState(false);
   const [gameLoss, setGameLoss] = useState(false);
+  const [gameRestart, setGameRestart] = useState(0);
 
   // Good algae
   // surface
@@ -111,7 +112,7 @@ export default function Game() {
       }
       setSurfaceAssets(assets);
     }
-  }, []);
+  }, [gameRestart]);
 
   // Places up to 4 floor algae
   useEffect(() => {
@@ -178,7 +179,7 @@ export default function Game() {
       }
       setFloorAssets(assets);
     }
-  }, []);
+  }, [gameRestart]);
 
   // game win condition
   useEffect(() => {
@@ -196,7 +197,18 @@ export default function Game() {
     if (gameStarted && remainingGoodAlgae === 0) {
       setGameLoss(true);
     }
-  }, [surfaceAssets, floorAssets, gameStarted])
+  }, [surfaceAssets, floorAssets, gameStarted]);
+
+  const restartGame = () => {
+    setCorrectRemoval(0);
+    setIncorrectRemoval(0);
+    setGameWin(false);
+    setGameLoss(false);
+    setActiveTool(null);
+    // setHoveredAlgae(null);
+    setGameStart(true);
+    setGameRestart((n) => n + 1);
+  }
 
   // sets active tool
   const handleToolClick = (tool) => {
@@ -294,6 +306,8 @@ export default function Game() {
       <Scoreboard correctRemoval={correctRemoval}></Scoreboard>
       {gameLoss && <LossScreen></LossScreen>}
       {gameWin && <WinScreen></WinScreen>}
+      {gameLoss && <LossScreen onRestart={restartGame}></LossScreen>}
+      {gameWin && <WinScreen onRestart={restartGame}></WinScreen>}
       {/* renders surface algae */}
       {surfaceAssets.map((asset, i) => (
         <img
