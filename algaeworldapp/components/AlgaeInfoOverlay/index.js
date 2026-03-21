@@ -46,7 +46,6 @@ export default function AlgaeInfoOverlay({hoveredAlgae}) {
     >
       <img
         src="/infoboxsvg.svg"
-        alt=""
         style={{
           position: "absolute",
           width: "100%",
@@ -58,7 +57,7 @@ export default function AlgaeInfoOverlay({hoveredAlgae}) {
       <div
         style={{
           position: "relative",
-          padding: "15px 79px",
+          padding: "15px 77px",
           color: "black",
           height: "100%",
         }}
@@ -79,7 +78,7 @@ export default function AlgaeInfoOverlay({hoveredAlgae}) {
           style={{
             fontWeight: "bold",
             fontSize: "20px",
-            marginBottom: "115px",
+            marginBottom: "100px",
           }}
         >
           {hoveredAlgae}
