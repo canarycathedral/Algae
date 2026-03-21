@@ -44,6 +44,7 @@ export default function AlgaeInfoOverlay({hoveredAlgae}) {
         overflow: "hidden",
       }}
     >
+      {/* infobox */}
       <img
         src="/infoboxsvg.svg"
         style={{
@@ -62,6 +63,7 @@ export default function AlgaeInfoOverlay({hoveredAlgae}) {
           height: "100%",
         }}
       >
+        {/* displays small image of relavent algae on infobox */}
         {imageSrc && (
           <img
             src={imageSrc}
@@ -74,6 +76,7 @@ export default function AlgaeInfoOverlay({hoveredAlgae}) {
             }}
           />
         )}
+        {/* displays relavent algae name on infobox */}
         <div
           style={{
             fontWeight: "bold",
@@ -83,6 +86,7 @@ export default function AlgaeInfoOverlay({hoveredAlgae}) {
         >
           {hoveredAlgae}
         </div>
+        {/* displays relavent algae info on infobox */}
         <div style={{ fontSize: "16px", lineHeight: 1.35 }}>
           {algaeInfo[hoveredAlgae]}
         </div>

@@ -67,7 +67,7 @@ export default function Game() {
               Math.abs(asset.y - y) < minDistance,
           );
           attempts++;
-        } while (overlaps && attempts < 50); // prevents infinite looping
+        } while (overlaps && attempts < 50); // prevents infinite looping. max 50 attempts
 
         // runs if algae does not overlap
         if (!overlaps) {
@@ -97,7 +97,7 @@ export default function Game() {
               Math.abs(asset.y - y) < minDistance,
           );
           attempts++;
-        } while (overlaps && attempts < 50); // prevents infinite looping
+        } while (overlaps && attempts < 50); // prevents infinite looping. max 50 attempts
 
         // runs if algae does not overlap
         if (!overlaps) {
@@ -136,7 +136,7 @@ export default function Game() {
               Math.abs(asset.y - y) < minDistance,
           );
           attempts++;
-        } while (overlaps && attempts < 50); // prevents infinite loop
+        } while (overlaps && attempts < 50); // prevents infinite loop. max 50 attempts
 
         // runs if algae can be placed without overlapping
         if (!overlaps) {
@@ -165,7 +165,7 @@ export default function Game() {
               Math.abs(asset.y - y) < minDistance,
           );
           attempts++;
-        } while (overlaps && attempts < 50);
+        } while (overlaps && attempts < 50); // prevents infinite looping. max 50 attempts
 
         if (!overlaps) {
           const src = goodSvgs[Math.floor(Math.random() * goodSvgs.length)];
@@ -181,14 +181,15 @@ export default function Game() {
     }
   }, [gameRestart]);
 
-  // game win condition
+  // game win condition. triggers when all three bad algae are removed
   useEffect(() => {
     if (correctRemoval >= 3) {
       setGameWin(true);
+      setActiveTool(null);
     }
   }, [correctRemoval]);
 
-  // game loss condition
+  // game loss condition. triggers when there are no good algae remaining
   useEffect(() => {
     const remainingGoodAlgae = [...surfaceAssets, ...floorAssets].filter(
       (asset) => !asset.isBad
@@ -196,16 +197,17 @@ export default function Game() {
 
     if (gameStarted && remainingGoodAlgae === 0) {
       setGameLoss(true);
+      setActiveTool(null);
     }
   }, [surfaceAssets, floorAssets, gameStarted]);
 
+  // game restart behaviour
   const restartGame = () => {
     setCorrectRemoval(0);
     setIncorrectRemoval(0);
     setGameWin(false);
     setGameLoss(false);
     setActiveTool(null);
-    // setHoveredAlgae(null);
     setGameStart(true);
     setGameRestart((n) => n + 1);
   }
@@ -245,7 +247,7 @@ export default function Game() {
           return next;
         });
       }
-      // if good floor algae is clicked, it is removed from surfaceAssets
+      // if good floor algae is clicked, it is removed from floorAssets
       else if (type === "floor") {
         setFloorAssets((prev) => {
           const next = [...prev];
@@ -304,10 +306,6 @@ export default function Game() {
         <StartScreen onStart={() => setGameStart(true)}></StartScreen>
       )}
       <Scoreboard correctRemoval={correctRemoval}></Scoreboard>
-      {gameLoss && <LossScreen></LossScreen>}
-      {gameWin && <WinScreen></WinScreen>}
-      {gameLoss && <LossScreen onRestart={restartGame}></LossScreen>}
-      {gameWin && <WinScreen onRestart={restartGame}></WinScreen>}
       {/* renders surface algae */}
       {surfaceAssets.map((asset, i) => (
         <img
@@ -413,6 +411,11 @@ export default function Game() {
       {activeTool === "magnifier" && hoveredAlgae && (
         <AlgaeInfoOverlay hoveredAlgae={hoveredAlgae} />
       )}
+      {/* Loss & Win screens */}
+      {gameLoss && <LossScreen></LossScreen>}
+      {gameWin && <WinScreen></WinScreen>}
+      {gameLoss && <LossScreen onRestart={restartGame}></LossScreen>}
+      {gameWin && <WinScreen onRestart={restartGame}></WinScreen>}
     </div>
   );
 }
