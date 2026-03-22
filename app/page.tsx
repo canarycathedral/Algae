@@ -3,16 +3,34 @@ import Footer from "../comp/footer";
 import ScrollBtn from "../comp/scrollbtn";
 import ProfileCard from "../comp/cards";
 import Mascot from "../comp/mascot";
+import Game from "@/components/Game"
+
 
 export default function Home() {
   return (
     <div 				style={{
         minHeight: "125vh",
 				width: "100%",
+				position: "relative",
 				backgroundImage: "url('/bg.svg')",
         backgroundSize: "100%",
 				backgroundPosition: "center",}}>
+
+      <div
+        style={{
+          position: "absolute",
+          top: "55vh",
+          left: "50%",
+          width: "100%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 2,
+        }}
+      >
+        <Game />
+      </div>
+          
       <Header />
+
       <main
         style={{
           minHeight: "185vh",
@@ -21,6 +39,7 @@ export default function Home() {
           justifyContent: "center",
         }}
       >
+        
         <Mascot />
         <div style ={{
           display: "flex",
@@ -29,6 +48,7 @@ export default function Home() {
           alignItems: "center",
           gap: "3rem",
         }}>
+          
           <h2
           style={{
             fontSize: "2.5rem",
@@ -69,7 +89,7 @@ export default function Home() {
       <div>
         <Footer />
       </div>
-      <ScrollBtn targetId="profileCards" />
+      <ScrollBtn targetId="profileCards" offset={-560} />
     </div>
   );
 }

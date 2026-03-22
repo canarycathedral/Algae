@@ -4,14 +4,20 @@ import Image from "next/image";
 
 type ScrollBtnProps = {
 	targetId: string;
+	offset?: number;
 };
 
-export default function ScrollBtn({ targetId }: ScrollBtnProps) {
+export default function ScrollBtn({ targetId, offset = 0 }: ScrollBtnProps) {
 	const handleClick = () => {
 		const target = document.getElementById(targetId);
 		if (!target) return;
 
-		target.scrollIntoView({ behavior: "smooth", block: "start" });
+		const targetTop = target.getBoundingClientRect().top + window.scrollY + offset;
+
+		window.scrollTo({
+			top: targetTop,
+			behavior: "smooth",
+		});
 	};
 
 	return (
