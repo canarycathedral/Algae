@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-
+//structure	
 type ProfileCardProps = {
 	imageSrc?: string;
 	imageAlt?: string;
@@ -16,6 +16,7 @@ export default function ProfileCard({
 	title = "Profile Title",
 	subtitle = "Profile Subtitle",
 }: ProfileCardProps) {
+//anim
 	const [isHovered, setIsHovered] = useState(false);
 
 	return (
@@ -32,6 +33,7 @@ export default function ProfileCard({
 				transition: "transform 300ms ease",
 			}}
 		>
+//defines
 			<Image
 				src={imageSrc}
 				alt={imageAlt}
