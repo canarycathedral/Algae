@@ -138,7 +138,7 @@ export default function Game() {
         let x, y, overlaps;
         // loops until algae can be placed without overlaps
         do {
-          x = Math.random() * (rect.width - floorAssetSize);
+          x = Math.random() * (rect.width - 300);
           y = centerY + (Math.random() - 0.5) * 50;
           overlaps = assets.some(
             (asset) =>
@@ -167,7 +167,7 @@ export default function Game() {
         let attempts = 0;
         let x, y, overlaps;
         do {
-          x = Math.random() * (rect.width - floorAssetSize);
+          x = Math.random() * (rect.width - 300);
           y = centerY + (Math.random() - 0.5) * 50;
           overlaps = assets.some(
             (asset) =>
