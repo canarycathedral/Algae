@@ -35,8 +35,8 @@ export default function AlgaeInfoOverlay({hoveredAlgae}) {
     <div
       style={{
         position: "absolute",
-        right: "0px",
-        top: "40px",
+        right: "-25px",
+        bottom: "120px",
         width: "285px",
         height: "220px",
         zIndex: 20,
