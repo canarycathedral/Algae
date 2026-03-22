@@ -43,11 +43,10 @@ export default function Mascot() {
 	return (
 		<div
 			ref={mascotRef}
-			id="mascot"
 			style={{
 				position: "absolute",
-				right: "20rem",
-				top: "48%",
+				right: "2rem",
+				top: "45rem",	
 				zIndex: 10,
 				transform: isHovered ? "scale(1.03  )" : "scale(1)",
 				transition: "transform 160ms ease, filter 160ms ease",
