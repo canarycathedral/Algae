@@ -22,6 +22,19 @@ export default function Home() {
         }}
       >
         <Mascot />
+        <div style ={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "3rem",
+        }}>
+          <h2
+          style={{
+            fontSize: "2.5rem",
+            fontWeight: "bold",
+          color: "white",}}
+            >Explore more Algae!</h2>
         <div id="profileCards" style={{
           display: "flex",
           justifyContent: "center",
@@ -51,7 +64,7 @@ export default function Home() {
           imageAlt="Profile preview image"
           title="Seaweed"
           subtitle="Macroalgae"
-        /></div>
+        /></div></div>
       </main>
       <div>
         <Footer />
