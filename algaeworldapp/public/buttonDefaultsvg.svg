@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 469.33 181.33">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f9ff58;
+      }
+
+      .cls-2 {
+        fill: #f2dd42;
+      }
+    </style>
+  </defs>
+  <g id="Net_default" data-name="Net default">
+    <g>
+      <rect class="cls-2" x="0" y="24.22" width="469.33" height="157.11" rx="47.22" ry="47.22"/>
+      <rect class="cls-1" x="0" width="469.33" height="157.11" rx="47.22" ry="47.22"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 361 361">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #4fcf5e;
+      }
+
+      .cls-2 {
+        fill: #f9ff58;
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient);
+        stroke: #4fcf5e;
+        stroke-miterlimit: 10;
+        stroke-width: 25px;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="180.5" y1="348.5" x2="180.5" y2="12.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4fcf5e"/>
+      <stop offset=".49" stop-color="#8cef73"/>
+    </linearGradient>
+  </defs>
+  <g id="Playbtn_default" data-name="Playbtn default">
+    <g>
+      <circle class="cls-3" cx="180.5" cy="180.5" r="168"/>
+      <path class="cls-2" d="M230.84,170.83l-68.85-39.75c-7.45-4.3-16.75,1.07-16.75,9.67v79.51c0,8.6,9.31,13.97,16.75,9.67l68.85-39.75c7.45-4.3,7.45-15.04,0-19.34Z"/>
+      <circle class="cls-1" cx="292.05" cy="98.95" r="30.62"/>
+      <circle class="cls-1" cx="306.63" cy="160.79" r="14.59"/>
+      <circle class="cls-1" cx="107.59" cy="284.66" r="35.67"/>
+    </g>
+  </g>
+</svg>
