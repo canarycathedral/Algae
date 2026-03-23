@@ -32,6 +32,7 @@ export default function ScrollBtn({ targetId, offset = 0 }: ScrollBtnProps) {
 				background: "transparent",
 				padding: 0,
 				cursor: "pointer",
+				zIndex: 50,
 			}}
 		>
 			<Image src="/scrollButtonsvg.svg" alt="Scroll button" width={106} height={106} />
