@@ -311,6 +311,7 @@ export default function Game() {
         backgroundRepeat: "no-repeat",
         overflow: "hidden",
         cursor: activeTool ? "none" : "default", // if there is an active tool, cursor: "none". else, cursor will be default
+        top: "5rem"
       }}
     >
       {!gameStarted && (

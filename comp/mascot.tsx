@@ -52,6 +52,7 @@ export default function Mascot() {
 				transition: "transform 160ms ease, filter 160ms ease",
 				filter: isHovered ? "brightness(1.05)" : "brightness(1)",
 				cursor: "pointer",
+				color: "rgba(100, 100, 100, 1)",
 			}}
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
